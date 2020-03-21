@@ -1,0 +1,29 @@
+class Solution(object):
+    def minWindow(self, s, t):
+        len_s=len(s)
+        len_t=len(t)
+        dct={}
+        if len_s == 0 or len_t==0 or len_t>len_s:
+            return ""
+        for char in t:
+            dct[char]=dct.get(char,0)+1
+        i=0
+        j=0
+        minWin=len_s+1
+        output=""
+        while i<len_s:
+            if s[i] in dct:
+                if dct[s[i]]>0:
+                    len_t-=1
+                dct[s[i]]-=1
+            while len_t==0:
+                if i-j+1<minWin:
+                    minWin=i-j+1
+                    output= s[j:i+1]
+                if s[j] in dct:
+                    dct[s[j]]+=1
+                    if dct[s[j]]>0:
+                        len_t+=1
+                j+=1
+            i+=1
+        return "" if minWin==len_s+1 else output
