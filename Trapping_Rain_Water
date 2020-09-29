@@ -1,0 +1,39 @@
+class Solution(object):
+    def find_trap(self, wall_height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        #using two pointers
+        left_max=0
+        right_max=0
+        l=0 #left pointer starts from left end
+        r=len(wall_height)-1 #left pointer starts from right end
+        trapped_water=0
+        
+        #loop until left pointer and right pointer doesn't overlap
+        while l<r:
+        
+            #check if value at left pointer <= value at right pointer
+            if wall_height[l] <= wall_height[r]:
+            
+                #check if value at left pointer >= current left maximum, append new left maximum
+                if wall_height[l] >= left_max:
+                    left_max = wall_height[l]
+                    
+                else: #compute trapped water
+                    trapped_water += (left_max - wall_height[l])
+                    
+                l+=1 #move left pointer towards right
+                
+            else: #if value at left pointer > value at right pointer
+            
+                #check if value at right pointer >= current right maximum, append new right maximum
+                if wall_height[r] >= right_max:
+                    right_max = height[r]
+                    
+                else: #compute trapped water
+                    trapped_water += (right_max - wall_height[r])
+                    
+                r-=1 #move right pointer towards left
+        return trapped_water
