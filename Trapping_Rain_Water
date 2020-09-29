@@ -30,7 +30,7 @@ class Solution(object):
             
                 #check if value at right pointer >= current right maximum, append new right maximum
                 if wall_height[r] >= right_max:
-                    right_max = height[r]
+                    right_max = wall_height[r]
                     
                 else: #compute trapped water
                     trapped_water += (right_max - wall_height[r])
